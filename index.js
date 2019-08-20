@@ -92,11 +92,27 @@ function toggleCheckedForListItem(itemID) {
   item.checked = !item.checked;
 }
 
+
+
+function deleteItemClicked(itemID){
+  const item = STORE.find(item => item.id === itemID);
+
+  STORE.splice(STORE.indexOf(item), 1);
+
+}
+
 function handleDeleteItemClicked() {
   // this function will be responsible for when users want to delete a shopping list
   // item
-  
+  // 
+  $('.js-shopping-list').on('click', '.js-item-delete', event => {
+    const itemID = getItemIDFromElement(event.currentTarget); 
+    deleteItemClicked(itemID);
+    renderShoppingList();
+    console.log(itemID);
+  });
 }
+
 
 // this function will be our callback when the page loads. it's responsible for
 // initially rendering the shopping list, and activating our individual functions
